@@ -24,8 +24,8 @@ public:
       {
         if(!nodes[i])
           nodes[i]=new Node<G>();
-        nodes[data->id]->edges[i]=(new Edge<G>(nodes[data->id],nodes[i]));
-      }
+        addEdge(data->id,i);
+        }
     }
 
     void addEdge(string from, string to){
@@ -39,8 +39,11 @@ public:
 
     Edge<G>* findEdge(string from, string to){
         if(nodes[from]!=0 && nodes[to]!=0)
-        return nodes[from]->edges[to];
-        else return nullptr;
+          if(nodes[from]->edges[to] != 0)
+            return nodes[from]->edges[to];
+        else
+          nodes[from]->edges.erase(to);
+        return nullptr;
     }
 
     void removeEdge(string from,string to){
@@ -51,10 +54,13 @@ public:
     }
 
     void removeNode(string id){
-
+      if (nodes[id]!=0){
+        for(auto it=nodes.begin();it!=nodes.end();++it){
+          removeEdge(it->first,id);
+        }
+      }
+      nodes.erase(id);
     }
-
-
 
     void imprimir(){
       for(auto i=nodes.begin();i!=nodes.end();++i){

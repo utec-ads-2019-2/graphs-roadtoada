@@ -21,9 +21,9 @@ int main(int argc, char *argv[]) {
     test.imprimir();
 
     cout<<"*Probando* \n"<<endl;
-    test.addEdge("4026","4024");
-    test.removeEdge("7252","4026");
-    test.removeNode("4027");
+    cout<<endl;
+    test.removeNode("4024");
+    cout<<"Termino remove"<<endl;
     test.imprimir();
 
 //    graph test;

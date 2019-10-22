@@ -9,7 +9,6 @@ using namespace std;
 template<typename G>
 class Edge;
 
-
 class airport{
 public:
   string id;
@@ -31,8 +30,8 @@ public:
     Node(){};
     Node(G data):data(data){};
     void print_edges(){
-      for(auto i=edges.begin();i!=edges.end();++i){
-        cout<<" Origen "<<i->second->nodes[0]->data->id<<" Destino "<<i->second->nodes[1]->data->id<<endl;
+      for(auto it=edges.begin();it!=edges.end();++it){
+        cout<<" Origen "<<it->second->nodes[0]->data->id<<" Destino "<<it->second->nodes[1]->data->id<<endl;
       }
     }
 };
