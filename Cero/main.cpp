@@ -25,7 +25,8 @@ int main(int argc, char *argv[]) {
     test.removeNode("4024");
     cout<<"Termino remove"<<endl;
     test.imprimir();
-
+    float density=test.densidad();
+    cout<<"Densidad es "<<density;
 //    graph test;
 //    return EXIT_SUCCESS;
 }

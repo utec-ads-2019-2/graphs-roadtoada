@@ -36,7 +36,6 @@ public:
     }
 };
 
-
 template <typename G>
 class Edge {
 public:
