@@ -28,32 +28,37 @@ public:
     typedef typename EdgeSeq::iterator EdgeIte;
 
 
-
-
-
-
-
-
-
     NodeSeq nodes;
-		NodeIte ni;
+	NodeIte ni;
     EdgeIte ei;
 
 		void crear_aristas(node* temp){
+			cout<<"Inicio crear arista"<<endl;
 			for(auto i:temp->data->destinos)
 			{
+				cout<<"Data is "<<i<<endl;
 				if(!nodes[i]){
+					cout<<"No node found"<<endl;
 					nodes[i]=new node();
+					cout<<"Nodo creado en dir "<<nodes[i]<<endl;
 				}
-				temp->edges.push_back(new edge(temp,nodes[i]));
+				cout<<"Begin const"<<endl;
+				cout<<"Nodes[i] is "<<nodes[i]<<endl;
+				edge tempedge(temp,nodes[i]);
+				//edge* tempedge();
+				cout<<"1"<<endl;
+				(temp->edges).push_back(temp2);
+				//cout<<"Finish const"<<endl;
+				return;
 			}
-
 		}
 
 
 		void addNode(N* nuevo){
 			if(!nodes[nuevo->id]){
-				node* temp(nuevo);
+				node* temp;
+				temp->data=nuevo;
+				//node* temp(nuevo);
 				crear_aristas(temp);
 				nodes[nuevo->id]=temp;
 			}

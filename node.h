@@ -9,13 +9,13 @@ using namespace std;
 template <typename G>
 class Node {
 public:
-    typedef G N;
-    // typedef typename G::N N;
+    typedef typename G::N N;
     typedef typename G::EdgeSeq EdgeSeq;
 
-    N data;
+    N* data;
     EdgeSeq edges;
     Node(){};
+    Node(N* data_):data(data_){};
     // Node(N data_, EdgeSeq aristas):data(data_),edges(aristas){};
 };
 
