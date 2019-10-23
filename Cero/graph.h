@@ -95,14 +95,19 @@ public:
         cout<<"Grafo es disperso"<<endl;
       return dense[0];
     }
+
 /*
+  void deepen(Node<G>* &nodo, map<<Node<G>*>,bool> &nodos){
+    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++)
+
+  }
+
     bool conexo(){
-      vector<Node<G>*> temp={};
+      map<<Node<G>*>,bool> temp={};
       for(auto it=nodes.begin();it!=nodes.end();++it){
-        temp.push_back(it->second);
+        temp[it->second];
       }
-      for(auto it=nodes.begin();it!=nodes.end();++it){
-        it->second
+      for(auto it=temp.begin();it!=temp.end();++it){
       }
     }
 */
