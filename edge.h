@@ -1,25 +1,17 @@
 #ifndef EDGE_H
 #define EDGE_H
+// #include "node.h"
+#include "node.h"
+#include <vector>
+using namespace std;
 
-template <typename G>
-class Edge {
-    typedef typename G::E E;
-    typedef typename G::node node;
-
-    E* data=nullptr;
-    node* nodes[2]={nullptr,nullptr};
-    public:
-    Edge(){};
-    Edge(node* &inicio, node* &fin){
-      nodes[0]=inicio;
-      nodes[1]=fin;
-      cout<<"Inicio es "<<inicio<<endl;
-      cout<<"Fin es "<<fin<<endl;
-      cout<<"Inicio es "<<nodes[0]<<endl;
-      cout<<"Fin es "<<nodes[1]<<endl;
-      data=nullptr;
-      cout<<"hm"<<endl;
-    }
-};
+// template <typename G>
+// class Edge {
+//     // typedef typename G::node node;
+//     // float +data;
+//         // vector<node*> edges;
+//     // vector<Node<Gr>*> node;
+//     // node nodes[2];
+// };
 
 #endif
