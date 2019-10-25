@@ -163,8 +163,10 @@ void deepen(Node<G>* nodo, map<Node<G>* ,bool> &nodos){
 
 
 bool coloreo(Node<G>* nodo, map<Node<G>* ,int> &nodos, int status){
+    cout<<"Status para adyacentes a nodo "<<nodo->data->id<<" es "<<status<<endl;
     for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
       if(nodos[it->second->nodes[1]]==!status){
+        cout<<"Returning false on "<<it->second->nodes[1]->data->id<<endl;
         return false;
       }
       if(nodos[it->second->nodes[1]]==-1){
@@ -173,6 +175,10 @@ bool coloreo(Node<G>* nodo, map<Node<G>* ,int> &nodos, int status){
     }
     for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
       for(auto it2=it->second->nodes[1]->edges.begin();it2!=it->second->nodes[1]->edges.end();it2++){
+        cout<<"Comprobando si colorear adyacentes "<<nodos[it2->second->nodes[1]]<<endl;
+        if(nodos[it2->second->nodes[1]]==status){
+          return false;
+        }
         if(nodos[it2->second->nodes[1]]==-1){
           if(coloreo(it->second->nodes[1],nodos,!status))
             break;
