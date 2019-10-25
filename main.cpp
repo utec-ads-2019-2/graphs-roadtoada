@@ -27,7 +27,8 @@ int main(int argc, char *argv[]) {
     //test.imprimir();
     float density=test.densidad();
     cout<<"Densidad es "<<density<<endl;
-    cout<<test.conexo();
+    cout<<test.conexo()<<endl;
+    cout<<test.bipartito();
 
 //    graph test;
 //    return EXIT_SUCCESS;
