@@ -124,27 +124,19 @@ public:
       }
     }
 
-/*
-  bool deepen(Node<G>* &nodo, map<<Node<G>*>,bool> &nodos){
-    nodos[nodo]=1;
-    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
-      nodos[it->nodes[1]]=1;
-    }
-    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
-      if(it->nodes[1]==0)
-        deepen(it->nodes[1],nodos);
-    }
-
-  }*/
-
+    
 void deepen(Node<G>* nodo, map<Node<G>* ,bool> &nodos){
     nodos[nodo]=1;
     for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
       nodos[it->second->nodes[1]]=1;
     }
     for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
-      if(it->second->nodes[1]==0)
-        (deepen(it->second->nodes[1],nodos));
+      for(auto it2=it->second->nodes[1]->edges.begin();it2!=it->second->nodes[1]->edges.end();it2++){
+        if(nodos[it2->second->nodes[1]]==0){
+          //cout<<nodos[it2->second->nodes[1]]<<" "<<it2->second->nodes[1]->data->id<<endl;
+          (deepen(it2->second->nodes[1],nodos));
+        }
+      }
     }
     return;
   }
@@ -155,6 +147,7 @@ void deepen(Node<G>* nodo, map<Node<G>* ,bool> &nodos){
         temp[it->second];
       }
       for(auto it=temp.begin();it!=temp.end();++it){
+        //cout<<"ANALYZING "<<it->first->data->id<<endl;
         deepen(it->first,temp);
         for(auto it2=temp.begin();it2!=temp.end();++it2){
           if(it2->second==0)
@@ -166,6 +159,44 @@ void deepen(Node<G>* nodo, map<Node<G>* ,bool> &nodos){
       }
       return true;
   }
+
+
+
+/*
+bool coloreo(Node<G>* nodo, map<Node<G>* ,int> &nodos, int status){
+    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
+      if(nodos[it->second->nodes[1]]==status)
+        return false;
+      if(nodos[it->second->nodes[1]]==-1){
+        nodos[it->second->nodes[1]]=status;
+    }
+    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
+      if(it->second->nodes[1]==-1)
+        (coloreo(it->second->nodes[1],nodos));
+    }
+    return true;
+  }
+
+  bool bipartito(){
+      map<Node<G>*,int> temp={};
+      for(auto it=nodes.begin();it!=nodes.end();++it){
+        temp[it->second]=-1;
+      }
+      auto it=temp.begin();
+      temp[it->first]=1;
+      coloreo(it->first,temp,-1);
+
+      for(auto it2=temp.begin();it2!=temp.end();++it2){
+        if(it2->second==0)
+          return false;
+      }
+      for(auto it2=temp.begin();it2!=temp.end();++it2){
+        it2->second=0;
+      }
+    return true;
+  }
+*/
+
 };
 
 #endif
