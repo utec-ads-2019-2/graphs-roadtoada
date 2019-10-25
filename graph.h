@@ -121,24 +121,51 @@ public:
           for(auto i:recorridos){
           }
         }
-
       }
+    }
 
 /*
-  void deepen(Node<G>* &nodo, map<<Node<G>*>,bool> &nodos){
-    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++)
+  bool deepen(Node<G>* &nodo, map<<Node<G>*>,bool> &nodos){
+    nodos[nodo]=1;
+    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
+      nodos[it->nodes[1]]=1;
+    }
+    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
+      if(it->nodes[1]==0)
+        deepen(it->nodes[1],nodos);
+    }
 
+  }*/
+
+void deepen(Node<G>* nodo, map<Node<G>* ,bool> &nodos){
+    nodos[nodo]=1;
+    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
+      nodos[it->second->nodes[1]]=1;
+    }
+    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
+      if(it->second->nodes[1]==0)
+        (deepen(it->second->nodes[1],nodos));
+    }
+    return;
   }
 
     bool conexo(){
-      map<<Node<G>*>,bool> temp={};
+      map<Node<G>*,bool> temp={};
       for(auto it=nodes.begin();it!=nodes.end();++it){
         temp[it->second];
       }
       for(auto it=temp.begin();it!=temp.end();++it){
+        deepen(it->first,temp);
+        for(auto it2=temp.begin();it2!=temp.end();++it2){
+          if(it2->second==0)
+            return false;
+        }
+        for(auto it2=temp.begin();it2!=temp.end();++it2){
+          it2->second=0;
+        }
       }
-    }
-*/
+      return true;
+  }
 };
 
 #endif
