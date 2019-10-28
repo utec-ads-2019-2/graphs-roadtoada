@@ -18,17 +18,12 @@ int main(int argc, char *argv[]) {
       }
       test.addNode(new airport(obj[i]["Id"].asString(),obj[i]["City"].asString(),obj[i]["Name"].asString(),obj[i]["Country"].asString(),stof(obj[i]["Longitude"].asString()),stof(obj[i]["Latitude"].asString()),destinos));
   }
-  //  test.imprimir();
-
-    //cout<<"*Probando* \n"<<endl;
-    //cout<<endl;
-    //test.removeNode("4024");
-    //cout<<"Termino remove"<<endl;
-    //test.imprimir();
-    float density=test.densidad();
-    cout<<"Densidad es "<<density<<endl;
-    cout<<test.conexo()<<endl;
-    cout<<test.bipartito();
+  test.imprimir();
+  float density=test.densidad();
+  cout<<"Densidad es "<<density<<endl;
+  cout<<test.conexo()<<endl;
+  cout<<test.bipartito();
+  test.imprimir();
 
 //    graph test;
 //    return EXIT_SUCCESS;
