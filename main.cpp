@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
         if(test.findNode(obj[i]["destinations"][j].asString())!=0){
           test.addEdge(obj[i]["Id"].asString(),obj[i]["destinations"][j].asString());
-          test.addEdge(obj[i]["destinations"][j].asString(),obj[i]["Id"].asString());
+          //test.addEdge(obj[i]["destinations"][j].asString(),obj[i]["Id"].asString());
         }
       }
   }
