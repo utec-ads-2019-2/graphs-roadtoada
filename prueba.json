@@ -1,0 +1,240 @@
+[
+  {
+    "City": "Monteria",
+    "Name": "Los Garzones",
+    "Country": "Colombia",
+    "Longitude": "-75.825831",
+    "Latitude": "8.823744",
+    "Id": "2731",
+    "destinations": [
+      "2732",
+      "2733"
+    ]
+  },
+  {
+    "City": "Mitu",
+    "Name": "Fabio Alberto Leon Bentley",
+    "Country": "Colombia",
+    "Longitude": "-70.233878",
+    "Latitude": "1.253664",
+    "Id": "2732",
+    "destinations": [
+      "1815"
+    ]
+  },
+  {
+    "City": "Manizales",
+    "Name": "La Nubia",
+    "Country": "Colombia",
+    "Longitude": "-75.464708",
+    "Latitude": "5.029597",
+    "Id": "2733",
+    "destinations": [
+      "2738"
+    ]
+  },
+  {
+    "City": "Puerto Carreno",
+    "Name": "Puerto Carreno",
+    "Country": "Colombia",
+    "Longitude": "-67.493164",
+    "Latitude": "6.184717",
+    "Id": "2738",
+    "destinations": [
+      "2731",
+      "3533"
+    ]
+  },
+  {
+    "City": "Pereira",
+    "Name": "Matecana",
+    "Country": "Colombia",
+    "Longitude": "-75.739519",
+    "Latitude": "4.812675",
+    "Id": "2739",
+    "destinations": [
+      "2738",
+      "1818",
+      "7201",
+      "1810"
+    ]
+  },
+  {
+    "City": "Kodiak",
+    "Name": "Kodiak",
+    "Country": "United States",
+    "Longitude": "-152.493856",
+    "Latitude": "57.749967",
+    "Id": "3531",
+    "destinations": [
+      "2732",
+      "2733",
+      "3533",
+      "7200",
+      "1818"
+    ]
+  },
+  {
+    "City": "Fort Lauderdale",
+    "Name": "Fort Lauderdale Hollywood Intl",
+    "Country": "United States",
+    "Longitude": "-80.15275",
+    "Latitude": "26.072583",
+    "Id": "3533",
+    "destinations": [
+      "679",
+      "1813"
+    ]
+  },
+  {
+    "City": "Warsaw",
+    "Name": "Okecie",
+    "Country": "Poland",
+    "Longitude": "20.967122",
+    "Latitude": "52.16575",
+    "Id": "679",
+    "destinations": [
+      "2731",
+      "1816",
+      "7200"
+    ]
+  },
+  {
+    "City": "Los Mochis",
+    "Name": "Valle Del Fuerte Intl",
+    "Country": "Mexico",
+    "Longitude": "-109.080806",
+    "Latitude": "25.685194",
+    "Id": "1814",
+    "destinations": [
+      "1816",
+      "1817",
+      "2739"
+    ]
+  },
+  {
+    "City": "Del Bajio",
+    "Name": "Guanajuato Intl",
+    "Country": "Mexico",
+    "Longitude": "-101.480847",
+    "Latitude": "20.993464",
+    "Id": "1815",
+    "destinations": [
+      "2739"
+    ]
+  },
+  {
+    "City": "La Paz",
+    "Name": "General Manuel Marquez De Leon Intl",
+    "Country": "Mexico",
+    "Longitude": "-110.362475",
+    "Latitude": "24.072694",
+    "Id": "1816",
+    "destinations": [
+      "1813",
+      "7202"
+    ]
+  },
+  {
+    "City": "Loreto",
+    "Name": "Loreto Intl",
+    "Country": "Mexico",
+    "Longitude": "-111.348361",
+    "Latitude": "25.989194",
+    "Id": "1817",
+    "destinations": [
+      "1818",
+      "1819"
+    ]
+  },
+  {
+    "City": "Saltillo",
+    "Name": "Plan De Guadalupe Intl",
+    "Country": "Mexico",
+    "Longitude": "-100.928669",
+    "Latitude": "25.549497",
+    "Id": "1810",
+    "destinations": [
+      "7201",
+      "1814"
+    ]
+  },
+  {
+    "City": "Lazard Cardenas",
+    "Name": "Lazaro Cardenas",
+    "Country": "Mexico",
+    "Longitude": "-102.220525",
+    "Latitude": "18.001731",
+    "Id": "1813",
+    "destinations": [
+      "1819"
+    ]
+  },
+  {
+    "City": "Nelson Lagoon",
+    "Name": "Nelson Lagoon",
+    "Country": "United States",
+    "Longitude": "-161.160278",
+    "Latitude": "56.0075",
+    "Id": "7203",
+    "destinations": [
+      "7202"
+    ]
+  },
+  {
+    "City": "False Pass",
+    "Name": "False Pass Airport",
+    "Country": "United States",
+    "Longitude": "-163.410278",
+    "Latitude": "54.8475",
+    "Id": "7202",
+    "destinations": [
+      "1819"
+    ]
+  },
+  {
+    "City": "Kipnuk",
+    "Name": "Kipnuk Airport",
+    "Country": "United States",
+    "Longitude": "-164.030556",
+    "Latitude": "59.933056",
+    "Id": "7201",
+    "destinations": [
+      "7200",
+      "1818"
+    ]
+  },
+  {
+    "City": "Nunam Iqua",
+    "Name": "Sheldon Point Airport",
+    "Country": "United States",
+    "Longitude": "-164.847778",
+    "Latitude": "62.520556",
+    "Id": "7200",
+    "destinations": [
+      "1819"
+    ]
+  },
+  {
+    "City": "Matamoros",
+    "Name": "General Servando Canales Intl",
+    "Country": "Mexico",
+    "Longitude": "-97.525311",
+    "Latitude": "25.769894",
+    "Id": "1818",
+    "destinations": [
+      "1819"
+    ]
+  },
+  {
+    "City": "Merida",
+    "Name": "Licenciado Manuel Crescencio Rejon Int",
+    "Country": "Mexico",
+    "Longitude": "-89.657672",
+    "Latitude": "20.936981",
+    "Id": "1819",
+    "destinations": [
+      "7200"
+    ]
+  }
+]

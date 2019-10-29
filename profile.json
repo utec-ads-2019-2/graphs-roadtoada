@@ -9,8 +9,8 @@
     "destinations": [
       "6972",
       "4026",
-      "4027"
-
+      "4027",
+      "1"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "destinations": [
       "7252",
       "4026",
-      "4027"
+      "4024"
     ]
   },
   {
@@ -48,8 +48,18 @@
     "Id": "4027",
     "destinations": [
       "4026",
-      "6972",
       "7252"
+    ]
+  },
+  {
+    "City": "Flores",
+    "Name": "Mundo Maya International",
+    "Country": "Guatemala",
+    "Longitude": "129.866383",
+    "Latitude": "160.913819",
+    "Id": "4024",
+    "destinations": [
+      "6972"
     ]
   }
 ]

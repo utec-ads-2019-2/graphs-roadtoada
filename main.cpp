@@ -7,24 +7,31 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   Graph<airport*> test;
-  ifstream ifs("profile.json");
+  ifstream ifs("prueba.json");
   Json::Reader reader;
   Json::Value obj;
   reader.parse(ifs, obj);
   for(int i=0;i<obj.size();i++){
       std::vector<string> destinos;
-      for(int j=0;j<obj[i]["destinations"].size();j++){
-        destinos.push_back(obj[i]["destinations"][j].asString());
-      }
-      test.addNode(new airport(obj[i]["Id"].asString(),obj[i]["City"].asString(),obj[i]["Name"].asString(),obj[i]["Country"].asString(),stof(obj[i]["Longitude"].asString()),stof(obj[i]["Latitude"].asString()),destinos));
+      test.addNode(new airport(obj[i]["Id"].asString(),obj[i]["City"].asString(),obj[i]["Name"].asString(),obj[i]["Country"].asString(),stof(obj[i]["Longitude"].asString()),stof(obj[i]["Latitude"].asString())));
   }
-  test.imprimir();
-  float density=test.densidad();
-  cout<<"Densidad es "<<density<<endl;
-  cout<<test.conexo()<<endl;
-  cout<<test.bipartito();
-  test.imprimir();
+  for(int i=0;i<obj.size();i++){
+      for(int j=0;j<obj[i]["destinations"].size();j++){
 
-//    graph test;
-//    return EXIT_SUCCESS;
+        if(test.findNode(obj[i]["destinations"][j].asString())!=0){
+          test.addEdge(obj[i]["Id"].asString(),obj[i]["destinations"][j].asString());
+          test.addEdge(obj[i]["destinations"][j].asString(),obj[i]["Id"].asString());
+        }
+      }
+  }
+  for(auto i:test.nodes){
+    for(auto j:i.second->edges){
+      if(test.findEdge(j.second->nodes[1]->data->id,i.first)==nullptr)
+        test.dirigido=true;
+    }
+  }
+    auto a=test.prim("2731");
+    cout<<test.nodes.size()<<" "<<a.nodes.size()<<endl;
+    a.nedges();
+
 }
