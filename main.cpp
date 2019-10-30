@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
         if(test.findNode(obj[i]["destinations"][j].asString())!=0){
           test.addEdge(obj[i]["Id"].asString(),obj[i]["destinations"][j].asString());
-          //test.addEdge(obj[i]["destinations"][j].asString(),obj[i]["Id"].asString());
+          // test.addEdge(obj[i]["destinations"][j].asString(),obj[i]["Id"].asString());
         }
       }
   }
@@ -30,8 +30,15 @@ int main(int argc, char *argv[]) {
         test.dirigido=true;
     }
   }
-    auto a=test.prim("2731");
-    cout<<test.nodes.size()<<" "<<a.nodes.size()<<endl;
-    a.nedges();
+  // test.~Graph();
+  test.imprimir();
+
+  // test.nodes.size();
+  // cout<<"Done"<<endl;
+  // test.nedges();
+  // cout<<test.densidad();
+    // auto a=test.prim("2731");
+    // cout<<test.nodes.size()<<" "<<a.nodes.size()<<endl;
+    // a.nedges();
 
 }

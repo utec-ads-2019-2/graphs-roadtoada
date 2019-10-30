@@ -23,12 +23,20 @@ public:
     typedef class Node<G*> node;
     map<string,Node<G>*> nodes;
 
+    ~Graph(){
+      for(auto aux=nodes.begin();aux!=nodes.end();aux++)
+      {
+        removeNode(aux->first);
+      }
+
+    }
+
     void nedges(){
       int aristas=0;
       for(auto it=nodes.begin();it!=nodes.end();++it){
         aristas+=it->second->edges.size();
       }
-      cout<<aristas/2<<endl;
+      cout<<aristas<<endl;
     }
     void addNode(G data){
       dense[1]=0;
@@ -80,6 +88,11 @@ public:
         delete nodes[from]->edges[to];
         nodes[from]->edges.erase(to);
       }
+      if(findEdge(to,from)!=0){
+        dense[1]=0;
+        delete nodes[to]->edges[from];
+        nodes[to]->edges.erase(from);
+      }
     }
 
     void removeNode(string id){
@@ -89,6 +102,7 @@ public:
           removeEdge(it->first,id);
         }
       }
+      delete nodes[id];
       nodes.erase(id);
     }
 
