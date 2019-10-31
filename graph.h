@@ -59,6 +59,16 @@ public:
         dense[1]=0;
       }
     }
+    void addEdge(string from, string to,float valor){
+      if(nodes[from]!=0 && nodes[to]!=0){
+        auto aux=new Edge<G>(nodes[from],nodes[to]);
+        nodes[from]->edges[to]=(aux);
+        if(nodes[from]->data!=0 && nodes[to]->data!=0)
+          aux->set_data(valor);
+
+        dense[1]=0;
+      }
+    }
 
     Node<G>* findNode(string id){
         if(nodes[id]!=nullptr)
@@ -88,7 +98,7 @@ public:
         delete nodes[from]->edges[to];
         nodes[from]->edges.erase(to);
       }
-      if(findEdge(to,from)!=0){
+      if(findEdge(to,from)!=0 && !dirigido){
         dense[1]=0;
         delete nodes[to]->edges[from];
         nodes[to]->edges.erase(from);
@@ -135,7 +145,7 @@ public:
           cout<<"F"<<endl;
           break;
         }
-        // cout<<aux->nodes[0]->data->id<<" "<<aux->nodes[1]->data->id<<" "<aux->data<<endl;
+        cout<<aux->nodes[0]->data->id<<" "<<aux->nodes[1]->data->id<<" "<<aux->data<<endl;
         edges.push_back(aux);
         prueba.push_back(aux->nodes[1]);
         auto guardar=*(aux->nodes[1]->data);
@@ -145,7 +155,7 @@ public:
       for(auto aux:edges){
         nod[aux->nodes[0]->data->id]->edges[aux->nodes[1]->data->id]=aux;
         auto reversa=new Edge<G>(aux->nodes[1],aux->nodes[0]);
-        reversa->set_data();
+        reversa->set_data(aux->data);
         nod[aux->nodes[1]->data->id]->edges[aux->nodes[0]->data->id]=reversa;
       }
       prim.nodes=nod;
@@ -263,7 +273,7 @@ public:
       for(auto aux:edges_kruskal){
         nod[aux->nodes[0]->data->id]->edges[aux->nodes[1]->data->id]=aux;
         auto reversa=new Edge<G>(aux->nodes[1],aux->nodes[0]);
-        reversa->set_data();
+        reversa->set_data(aux->data);
         nod[aux->nodes[1]->data->id]->edges[aux->nodes[0]->data->id]=reversa;
       }
       kruskal.nodes=nod;

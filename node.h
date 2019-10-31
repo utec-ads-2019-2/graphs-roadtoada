@@ -75,6 +75,7 @@ public:
       data=0;
 
     }
+    void set_data(float data_){data=data_;};
     void set_data(){
       data=distance(nodes[0]->data->y,nodes[0]->data->x,nodes[1]->data->y,nodes[1]->data->x);
       // data=sqrt(pow(nodes[1]->data->x-nodes[0]->data->x,2)+pow(nodes[1]->data->y-nodes[0]->data->y,2));
