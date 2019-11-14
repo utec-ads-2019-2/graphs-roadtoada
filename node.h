@@ -13,8 +13,7 @@ long double toRadians(const long double degree)
     return (one_deg * degree);
 }
 
-long double distance(long double lat1, long double long1,
-                     long double lat2, long double long2)
+long double distance(long double lat1, long double long1, long double lat2, long double long2)
 {
     lat1 = toRadians(lat1);
     long1 = toRadians(long1);
@@ -51,7 +50,7 @@ public:
 class example{
 public:
   char id;
-  example(char):(){};
+  example(char _id):id(_id){};
 };
 
 template <typename G>
@@ -80,6 +79,7 @@ public:
       data=0;
 
     }
+    void set_data(float data_){data=data_;};
     void set_data(){
       data=distance(nodes[0]->data->y,nodes[0]->data->x,nodes[1]->data->y,nodes[1]->data->x);
       // data=sqrt(pow(nodes[1]->data->x-nodes[0]->data->x,2)+pow(nodes[1]->data->y-nodes[0]->data->y,2));
