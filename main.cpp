@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   Graph<airport*> test;
-  ifstream ifs("prueba.json");
+  ifstream ifs("profile.json");
   Json::Reader reader;
   Json::Value obj;
   reader.parse(ifs, obj);
@@ -31,8 +31,9 @@ int main(int argc, char *argv[]) {
     }
   }
   // test.~Graph();
-  test.imprimir();
-
+  cout<<"KRUSKAL:"<<endl;
+  auto a=test.kruskal();
+  a.imprimir();
   // test.nodes.size();
   // cout<<"Done"<<endl;
   // test.nedges();

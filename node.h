@@ -48,6 +48,11 @@ public:
   airport(string id_,string city_,string name_,string country_,double x,double y):id(id_),city(city_),name(name_),country(country_),x(x),y(y){};
 };
 
+class example{
+public:
+  char id;
+  example(char):(){};
+};
 
 template <typename G>
 class Node {
