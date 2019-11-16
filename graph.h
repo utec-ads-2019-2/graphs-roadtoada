@@ -6,6 +6,7 @@
 #include <map>
 #include <iterator>
 #include <algorithm>
+#include <queue>
 #include "node.h"
 using namespace std;
 
@@ -340,7 +341,6 @@ public:
       temp[it->second];
     }
     for(auto it=temp.begin();it!=temp.end();++it){
-      //cout<<"ANALYZING "<<it->first->data->id<<endl;
       deepen(it->first,temp);
       for(auto it2=temp.begin();it2!=temp.end();++it2){
         if(it2->second==0)
@@ -353,52 +353,72 @@ public:
     return true;
   }
 
-  bool coloreo(Node<G>* nodo, map<Node<G>* ,int> &nodos, int status){
-    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
-      if(nodos[it->second->nodes[1]]==!status){
-        return false;
+  void DFSLoop(Node<G>* nodo, map<Node<G>* ,Node<G>*> &nodos, map<Node<G>*,bool> &checker){
+      for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
+        if(checker[it->second->nodes[1]])
+          continue;
+        checker[it->second->nodes[1]]=1;
+        nodos[it->second->nodes[1]]=nodo;
+        cout<<"Added "<<nodo->data->id<<" to "<<it->second->nodes[1]->data->id<<endl;
+        DFSLoop(it->second->nodes[1], nodos, checker);
       }
-      if(nodos[it->second->nodes[1]]==-1){
-        nodos[it->second->nodes[1]]=status;
-      }
-    }
-    for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
-      for(auto it2=it->second->nodes[1]->edges.begin();it2!=it->second->nodes[1]->edges.end();it2++){
-        if(nodos[it2->second->nodes[1]]==status){
-          return false;
-        }
-        if(nodos[it2->second->nodes[1]]==-1){
-          if(coloreo(it->second->nodes[1],nodos,!status))
-            break;
-          else
-            return false;
-        }
-      }
-    }
-    return true;
+    return;
   }
 
-  bool bipartito(){
-    map<Node<G>*,int> temp={};
+  vector<pair<string,string>> DFS(string id){
+    map<Node<G>*,Node<G>*> temp={};
+    map<Node<G>*,bool> check={};
+    vector<pair<string,string>> answer={};
     for(auto it=nodes.begin();it!=nodes.end();++it){
-      temp[it->second]=-1;
+      temp[it->second]=0;
+      check[it->second]=0;
     }
+    check[nodes[id]]=1;
+    temp.erase(nodes[id]);
+    DFSLoop(nodes[id],temp,check);
+    for(auto it=temp.begin();it!=temp.end();++it){
+      if(check[it->first])
+        answer.push_back(make_pair(it->second->data->id,it->first->data->id));
+      else
+        answer.push_back(make_pair(it->first->data->id,"no way"));
+    }
+    
+    return answer;
+  }
 
-    auto it=temp.begin();
-    temp[it->first]=1;
-    if(!coloreo(it->first,temp,0)){
-      return false;
-    };
-    while(it!=temp.end()){
-      if(it->second==-1){
-        temp[it->first]=1;
-        if(!coloreo(it->first,temp,0)){
-          return false;
+  vector<pair<string,string>> BFS(string id){
+    map<Node<G>*,Node<G>*> temp={};
+    queue<Node<G>*> check;
+    map<Node<G>*,bool> checker;
+    vector<pair<string,string>> answer={};
+    check.push(nodes[id]);
+    Node<G>* current;
+    for(auto it=nodes.begin();it!=nodes.end();++it){
+      checker[it->second]=0;
+      temp[it->second]=0;
+    }
+    checker[nodes[id]]=1;
+    temp.erase(nodes[id]);
+    while (!check.empty()){
+      current=check.front();
+      check.pop();
+      for(auto it=current->edges.begin();it!=current->edges.end();++it){
+        if(!checker[it->second->nodes[1]]){
+          temp[it->second->nodes[1]]=current;
+          checker[it->second->nodes[1]]=1;
+          check.push(it->second->nodes[1]);
+          cout<<"Added "<<current->data->id<<" to "<<it->second->nodes[1]->data->id<<endl;
         }
       }
-      it++;
     }
-    return(true);
+    for(auto it=temp.begin();it!=temp.end();++it){
+      cout<<it->first->data->id<<endl;
+      if(checker[it->first])
+        answer.push_back(make_pair(it->second->data->id,it->first->data->id));
+      else
+        answer.push_back(make_pair(it->first->data->id,"no way"));
+    }    
+    return answer;
   }
 
 };
