@@ -4,11 +4,6 @@
 #include "graph.h"
 #include <vector>
 
-class P{
-public:
-  string id;
-  P(string id):id(id){};
-};
 
 using namespace std;
 
@@ -106,40 +101,27 @@ int main(int argc, char *argv[]) {
   test.addNode(new P("D"));
   test.addNode(new P("E"));
   test.addNode(new P("F"));
-  test.addNode(new P("G"));
-  test.addNode(new P("H"));
-  test.addNode(new P("I"));
-  test.addEdge("A","B",15);
-  test.addEdge("A","E",15);
-  test.addEdge("A","C",15);
-  test.addEdge("B","D",15);
-  test.addEdge("B","C",15);
-  test.addEdge("C","E",15);
-  test.addEdge("C","F",15);
-  test.addEdge("D","C",15);
-  test.addEdge("E","H",15);
-  test.addEdge("H","I",15);
-  test.addEdge("I","G",15);
-  test.addEdge("G","E",15);
-  
-  test.addEdge("B","A",15);
-  test.addEdge("E","A",15);
-  test.addEdge("C","A",15);
-  test.addEdge("D","B",15);
-  test.addEdge("C","B",15);
-  test.addEdge("E","C",15);
-  test.addEdge("F","C",15);
-  test.addEdge("C","D",15);
-  test.addEdge("H","E",15);
-  test.addEdge("I","H",15);
-  test.addEdge("G","I",15);
-  test.addEdge("E","G",15);
+  test.addEdge("A","B",10);
+  test.addEdge("A","E",11);
+  test.addEdge("A","C",2);
+  test.addEdge("C","D",3);
+  test.addEdge("B","F",4);
+  test.addEdge("A","F",3);
+  test.addEdge("F","E",2);
 
+  test.addEdge("B","A",10);
+  test.addEdge("E","A",11);
+  test.addEdge("C","A",2);
+  test.addEdge("D","C",3);
+  test.addEdge("F","B",4);
+  test.addEdge("F","A",3);
+  test.addEdge("E","F",2);
+
+  
 
   test.conexo();
   test.imprimir();
   cout<<endl<<endl;
-  cout<<endl<<endl<<"BFS:"<<endl;
   //DFS test
     /*vector<pair<string,string>> answer=test.DFS("A");
     cout<<"Printing"<<endl;
@@ -147,9 +129,12 @@ int main(int argc, char *argv[]) {
       cout<<it->first<<" "<<it->second<<endl;
     }*/
   //BFS test
+    /*cout<<endl<<endl<<"BFS:"<<endl;
     vector<pair<string,string>> answer=test.BFS("A");
     cout<<"Printing"<<endl;
     for(auto it=answer.begin();it!=answer.end();++it){
       cout<<it->first<<" "<<it->second<<endl;
-    }
+    }*/
+
+  auto test_dijkstra= test.dijkstra("A");
 }

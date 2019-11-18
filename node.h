@@ -36,6 +36,12 @@ long double distance(long double lat1, long double long1, long double lat2, long
 template<typename G>
 class Edge;
 
+class P{
+public:
+  string id;
+  P(string id):id(id){};
+};
+
 class airport{
 public:
   string id;
