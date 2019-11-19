@@ -15,12 +15,15 @@ class airport;
 class example;
 
 
+
 template <typename G>
 class Graph {
   float dense[2]={0,1};
+  typedef class Node<G>* node;
+  typedef class Edge<G>* edge;
 
 private:
-  void deepen(Node<G>* nodo, map<Node<G>* ,bool> &nodos){
+  void deepen(node nodo, map<node ,bool> &nodos){
     nodos[nodo]=1;
     for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
       nodos[it->second->nodes[1]]=1;
@@ -35,9 +38,9 @@ private:
     return;
   }
 
-  Edge<G>* siguiente_menor(double n,vector<Edge<G>*> recorridas){
+  edge siguiente_menor(double n,vector<edge> recorridas){
     double a=2147483647;
-    Edge<G>* edge;
+    edge edge;
     for(auto i=nodes.begin();i!=nodes.end();++i)
     {
         for(auto j=i->second->edges.begin();j!=i->second->edges.end();++j)
@@ -51,9 +54,9 @@ private:
     return edge;
   }
 
-  Edge<G>* menor_arista_nodos(vector<Node<G>*> recorridos){
+  edge menor_arista_nodos(vector<node> recorridos){
     double minimo=2147483647;
-    Edge<G>* arista=nullptr;
+    edge arista=nullptr;
     for(auto i:recorridos){
       for(auto j=i->edges.begin();j!=i->edges.end();++j){
         if(j->second->data<=minimo && (find(recorridos.begin(), recorridos.end(), j->second->nodes[1]) == recorridos.end())){
@@ -65,7 +68,7 @@ private:
     return arista;
   }
 
-  bool coloreo(Node<G>* nodo, map<Node<G>* ,int> &nodos, int status){
+  bool coloreo(node nodo, map<node ,int> &nodos, int status){
     for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
       if(nodos[it->second->nodes[1]]==!status){
         return false;
@@ -90,13 +93,12 @@ private:
     return true;
   }
 
-  void DFSLoop(Node<G>* nodo, map<Node<G>* ,Node<G>*> &nodos, map<Node<G>*,bool> &checker){
+  void DFSLoop(node nodo, map<node ,node> &nodos, map<node,bool> &checker){
       for(auto it=nodo->edges.begin();it!=nodo->edges.end();it++){
         if(checker[it->second->nodes[1]])
           continue;
         checker[it->second->nodes[1]]=1;
         nodos[it->second->nodes[1]]=nodo;
-        cout<<"Added "<<nodo->data->id<<" to "<<it->second->nodes[1]->data->id<<endl;
         DFSLoop(it->second->nodes[1], nodos, checker);
       }
     return;
@@ -105,8 +107,7 @@ private:
   
 public:
   bool dirigido=0;
-  typedef class Node<G*> node;
-  map<string,Node<G>*> nodes;
+  map<string,node> nodes;
 
   ~Graph(){
     for(auto aux=nodes.begin();aux!=nodes.end();aux++)
@@ -143,7 +144,7 @@ public:
     }
   }
 
-  Node<G>* findNode(string id){
+  node findNode(string id){
       if(nodes[id]!=nullptr)
         return nodes[id];
       else
@@ -151,7 +152,7 @@ public:
       return nullptr;
   }
 
-  Edge<G>* findEdge(string from, string to){
+  edge findEdge(string from, string to){
       if(nodes[from]!=0 && nodes[to]!=0){
         if(nodes[from]->edges[to] != 0)
           return nodes[from]->edges[to];
@@ -216,20 +217,15 @@ public:
     throw exception();
     }
     Graph<G> prim;
-    std::vector<Edge<G>*> edges;
-    map<string,Node<G>*> nod;
-    vector<Node<G>*>prueba;
+    std::vector<edge> edges;
+    map<string,node> nod;
+    vector<node> prueba;
     prueba.push_back(nodes[id]);
     auto inicio=*(nodes[id]->data);
     // inicio.destinos.clear();
     nod[id]=new Node<G>(&inicio);
     while(prueba.size()!=nodes.size()){
       auto aux=menor_arista_nodos(prueba);
-      if(aux==nullptr){
-        cout<<"F"<<endl;
-        break;
-      }
-      cout<<aux->nodes[0]->data->id<<" "<<aux->nodes[1]->data->id<<" "<<aux->data<<endl;
       edges.push_back(aux);
       prueba.push_back(aux->nodes[1]);
       auto guardar=*(aux->nodes[1]->data);
@@ -247,7 +243,7 @@ public:
   }
 
   bool bipartito(){
-      map<Node<G>*,int> temp={};
+      map<node,int> temp={};
       for(auto it=nodes.begin();it!=nodes.end();++it){
         temp[it->second]=-1;
       }
@@ -278,21 +274,21 @@ public:
     throw exception();
     }
     Graph<G> kruskal;
-    map<string,Node<G>*>  nod;
+    map<string,node>  nod;
     double minimo=0;
     int nodos=0;
-    vector<vector<Node<G>*>>recorridos;
-    vector<Edge<G>*>recorridas;
-    vector<Edge<G>*>edges_kruskal;
-    vector<Node<G>*>nodes_kruskal;
+    vector<vector<node>>recorridos;
+    vector<edge>recorridas;
+    vector<edge>edges_kruskal;
+    vector<node>nodes_kruskal;
     while(nodes.size()!=(edges_kruskal.size()/2)+1){
       auto edge=siguiente_menor(minimo,recorridas);
       // if(edge==nullptr)
       recorridas.push_back(edge);
       recorridas.push_back(findEdge(edge->nodes[1]->data->id,edge->nodes[0]->data->id));
-      Node<G>* inicio=nullptr;
+      node inicio=nullptr;
       int i1,i2,j1,j2;
-      Node<G>*  fin=nullptr;
+      node  fin=nullptr;
       for(int i=0;i<recorridos.size();i++)
       {
         for(int j=0;j<recorridos[i].size();j++)
@@ -311,7 +307,7 @@ public:
       if(inicio==nullptr && fin==nullptr)
       {
         cout<<"{"<<edge->nodes[0]->data->id<<" - "<<edge->nodes[1]->data->id<<"} => "<<edge->data<<endl;
-        vector<Node<G>*> n;
+        vector<node> n;
         n.push_back(edge->nodes[0]);
         n.push_back(edge->nodes[1]);
         recorridos.push_back(n);
@@ -401,7 +397,7 @@ public:
   }
 
   bool conexo(){
-    map<Node<G>*,bool> temp={};
+    map<node,bool> temp={};
     for(auto it=nodes.begin();it!=nodes.end();++it){
       temp[it->second];
     }
@@ -419,8 +415,8 @@ public:
   }
 
   vector<pair<string,string>> DFS(string id){
-    map<Node<G>*,Node<G>*> temp={};
-    map<Node<G>*,bool> check={};
+    map<node,node> temp={};
+    map<node,bool> check={};
     vector<pair<string,string>> answer={};
     for(auto it=nodes.begin();it!=nodes.end();++it){
       temp[it->second]=0;
@@ -440,12 +436,12 @@ public:
   }
 
   vector<pair<string,string>> BFS(string id){
-    map<Node<G>*,Node<G>*> temp={};
-    queue<Node<G>*> check;
-    map<Node<G>*,bool> checker;
+    map<node,node> temp={};
+    queue<node> check;
+    map<node,bool> checker;
     vector<pair<string,string>> answer={};
     check.push(nodes[id]);
-    Node<G>* current;
+    node current;
     for(auto it=nodes.begin();it!=nodes.end();++it){
       checker[it->second]=0;
       temp[it->second]=0;
@@ -460,12 +456,10 @@ public:
           temp[it->second->nodes[1]]=current;
           checker[it->second->nodes[1]]=1;
           check.push(it->second->nodes[1]);
-          cout<<"Added "<<current->data->id<<" to "<<it->second->nodes[1]->data->id<<endl;
         }
       }
     }
     for(auto it=temp.begin();it!=temp.end();++it){
-      cout<<it->first->data->id<<endl;
       if(checker[it->first])
         answer.push_back(make_pair(it->second->data->id,it->first->data->id));
       else
@@ -473,14 +467,12 @@ public:
     }    
     return answer;
   }
-
-
+  
   Graph<G> dijkstra(string id){
     Graph<G> a;
-
-    map<Node<G>*,int> final;
-    map<Node<G>*,Node<G>*> answer;
-    map<Node<G>*,bool> done;
+    map<node,int> final;
+    map<node,node> answer;
+    map<node,bool> done;
     for(auto it=nodes.begin();it!=nodes.end();it++){
       final[it->second]=-1;
     }
@@ -489,8 +481,6 @@ public:
     final[nodes[id]]=0;
     done[nodes[id]]=1;
     for(int i=0;i<nodes.size();i++){
-      cout<<"EVALUATING "<<temp->data->id<<endl;
-      //map<Node<G>*,int> pair;
       for(auto it=temp->edges.begin();it!=temp->edges.end();it++){
         if((final[it->second->nodes[1]]==-1 || final[it->second->nodes[1]]>(prev+it->second->data)) && !done[it->second->nodes[1]]){
           final[it->second->nodes[1]]=prev+it->second->data;
@@ -498,62 +488,34 @@ public:
         }
       }
       auto it=final.begin();
-      auto it2=it;
-      auto prevnode=it->first;
-      auto temp2=temp;
+      node prevnode=it->first;
       while(it!=final.end()){
         if(!done[it->first]){
           prevnode=it->first;
-          answer[it->first]=temp;
           it++;
           break;
         }
         it++;
       }
-      cout<<"Prevnode is "<<prevnode->data->id<<endl;
-      temp2=prevnode;
       while(it!=final.end()){
-        cout<<it->first->data->id<<", of value "<<final[it->first]<<",comparing with "<<final[prevnode]<<endl;
-        if(!done[it->first]){
-          cout<<"Not done!"<<endl;
-          cout<<"Assigning answer "<<temp->data->id<<" to "<<it->first->data->id<<endl;
-          answer[it->first]=temp;
-          if(final[it->first] != -1 && final[it->first]<final[prevnode]){
-            cout<<final[it->first]<<" is lesser!"<<endl;
-            cout<<endl<<"Prev changed to "<<prev<<endl<<endl;
-            temp2=it->first;
-            cout<<"Erasing "<<prevnode->data->id<<endl;
-            answer.erase(prevnode);
+        if(!done[it->first])
+          if((final[it->first] != -1 && final[it->first]<final[prevnode]))
             prevnode=it->first;
-            it++;
-            continue;
-          }
-          it2=it;
-          it++;
-          cout<<"Erasing "<<it2->first->data->id<<endl;
-          answer.erase(it2->first);
-        }
-        else{
-          cout<<"Done!"<<endl;
-          it++;
-          continue;
+        it++;
+      }
+      temp=prevnode;
+      prev=final[temp];
+      done[prevnode]=1;
+    }
+    for(auto it=final.begin();it!=final.end();it++)
+      a.addNode(new P(it->first->data->id));
+    for(auto it=answer.begin();it!=answer.end();it++){
+      for(auto it2=it->second->edges.begin();it2!=it->second->edges.end();it2++){
+        if(it2->second->nodes[1]==it->first){
+          a.addEdge(it->second->data->id,it->first->data->id,it2->second->data);
+          break;
         }
       }
-      temp=temp2;
-      cout<<"Gonna put done in "<<prevnode->data->id<<endl;
-      prev=final[temp];
-      cout<<"temp is "<<temp->data->id<<" with value "<<final[temp]<<endl;
-      done[prevnode]=1;
-      cout<<"Prev is "<<prev<<endl;
-      cout<<endl<<endl;
-    }
-
-    for(auto it=final.begin();it!=final.end();it++){
-      cout<<it->first->data->id<<" "<<it->second<<endl;
-    }
-    cout<<endl<<endl;
-    for(auto it=answer.begin();it!=answer.end();it++){
-      cout<<it->first->data->id<<" "<<it->second->data->id<<endl;
     }
     return a;
   };

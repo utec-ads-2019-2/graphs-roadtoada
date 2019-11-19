@@ -35,7 +35,6 @@ long double distance(long double lat1, long double long1, long double lat2, long
 
 template<typename G>
 class Edge;
-
 class P{
 public:
   string id;
@@ -61,9 +60,10 @@ public:
 
 template <typename G>
 class Node {
+  typedef class Node<G>* edge;
 public:
     G data;
-    map<string,Edge<G>*> edges;
+    map<string,edge> edges;
     Node(){};
     Node(G data):data(data){};
     void print_edges(){

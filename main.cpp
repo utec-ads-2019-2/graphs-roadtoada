@@ -9,8 +9,8 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
+  Graph<P*>test;
   // charged data
-    // Graph<airport*> test;
     // ifstream ifs("prueba.json");
     // Json::Reader reader;
     // Json::Value obj;
@@ -94,32 +94,65 @@ int main(int argc, char *argv[]) {
     test.imprimir();
     test.nedges();
     cout<<test.densidad();*/
-  Graph<P*>test;
-  test.addNode(new P("A"));
-  test.addNode(new P("B"));
-  test.addNode(new P("C"));
-  test.addNode(new P("D"));
-  test.addNode(new P("E"));
-  test.addNode(new P("F"));
-  test.addEdge("A","B",10);
-  test.addEdge("A","E",11);
-  test.addEdge("A","C",2);
-  test.addEdge("C","D",3);
-  test.addEdge("B","F",4);
-  test.addEdge("A","F",3);
-  test.addEdge("F","E",2);
+  /*test1{}
+    test.addNode(new P("A"));
+    test.addNode(new P("B"));
+    test.addNode(new P("C"));
+    test.addNode(new P("D"));
+    test.addNode(new P("E"));
+    test.addNode(new P("F"));
+    test.addEdge("A","B",4);
+    test.addEdge("A","C",2);
+    test.addEdge("C","B",1);
+    test.addEdge("B","D",5);
+    test.addEdge("C","D",8);
+    test.addEdge("C","E",10);
+    test.addEdge("E","F",2);
+    test.addEdge("E","D",2);
+    test.addEdge("D","F",6);
 
-  test.addEdge("B","A",10);
-  test.addEdge("E","A",11);
-  test.addEdge("C","A",2);
-  test.addEdge("D","C",3);
-  test.addEdge("F","B",4);
-  test.addEdge("F","A",3);
-  test.addEdge("E","F",2);
+    test.addEdge("B","A",4);
+    test.addEdge("C","A",2);
+    test.addEdge("B","C",1);
+    test.addEdge("D","B",5);
+    test.addEdge("D","C",8);
+    test.addEdge("E","C",10);
+    test.addEdge("F","E",2);
+    test.addEdge("D","E",2);
+    test.addEdge("F","D",6);
+  */
+  /*test2{}*/
+    test.addNode(new P("A"));
+    test.addNode(new P("B"));
+    test.addNode(new P("C"));
+    test.addNode(new P("D"));
+    test.addNode(new P("E"));
+    test.addNode(new P("F"));
+    test.addEdge("A","B",10);
+    test.addEdge("A","E",11);
+    test.addEdge("A","C",2);
+    test.addEdge("C","D",3);
+    test.addEdge("B","F",4);
+    test.addEdge("A","F",3);
+    test.addEdge("F","E",2);
 
+    test.addEdge("B","A",10);
+    test.addEdge("E","A",11);
+    test.addEdge("C","A",2);
+    test.addEdge("D","C",3);
+    test.addEdge("F","B",4);
+    test.addEdge("F","A",3);
+    test.addEdge("E","F",2);
   
 
   test.conexo();
+  test.BFS("A");
+  test.DFS("A");
+  test.densidad();
+  //test.kruskal();
+  test.prim("A");
+  test.conexo();
+  test.bipartito();
   test.imprimir();
   cout<<endl<<endl;
   //DFS test
@@ -137,4 +170,5 @@ int main(int argc, char *argv[]) {
     }*/
 
   auto test_dijkstra= test.dijkstra("A");
+  test_dijkstra.imprimir();
 }
