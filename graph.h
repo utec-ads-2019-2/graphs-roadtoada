@@ -550,16 +550,10 @@ public:
 
     for(auto it=final.begin();it!=final.end();it++){
       cout<<it->first->data->id<<" "<<it->second<<endl;
-      a.addNode(new P(it->first->data->id));
     }
     cout<<endl<<endl;
     for(auto it=answer.begin();it!=answer.end();it++){
       cout<<it->first->data->id<<" "<<it->second->data->id<<endl;
-      for(auto it2=it->second->edges.begin();it2!=it->second->edges.end();it2++){
-        if(it2->second->nodes[1]==it->first){
-          a.addEdge(it->second->data->id,it->first->data->id,final,nodes[it->second->data->id]);
-          break;
-      }
     }
     return a;
   };
