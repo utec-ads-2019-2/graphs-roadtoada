@@ -60,7 +60,7 @@ public:
 
 template <typename G>
 class Node {
-  typedef class Node<G>* edge;
+  typedef class Edge<G>* edge;
 public:
     G data;
     map<string,edge> edges;
@@ -76,14 +76,18 @@ public:
 template <typename G>
 class Edge {
 public:
-    typedef Node<G>* node;
+    typedef class Node<G>* node;
     double data;
     node nodes[2];
     Edge(node inicio,node fin){
       nodes[0]=inicio;
       nodes[1]=fin;
       data=0;
-
+    }
+    Edge(node inicio,node fin, int valor){
+      nodes[0]=inicio;
+      nodes[1]=fin;
+      data=valor;
     }
     void set_data(float data_){data=data_;};
     void set_data(){

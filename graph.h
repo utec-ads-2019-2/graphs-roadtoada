@@ -168,7 +168,7 @@ public:
 
   void addEdge(string from, string to,float valor){
     if(nodes[from]!=0 && nodes[to]!=0){
-      auto aux=new Edge<G>(nodes[from],nodes[to]);
+      auto aux=new Edge<G>(nodes[from],nodes[to],valor);
       nodes[from]->edges[to]=(aux);
       if(nodes[from]->data!=0 && nodes[to]->data!=0)
         aux->set_data(valor);
@@ -434,7 +434,6 @@ public:
     
     return answer;
   }
-
   vector<pair<string,string>> BFS(string id){
     map<node,node> temp={};
     queue<node> check;
@@ -467,7 +466,7 @@ public:
     }    
     return answer;
   }
-  
+
   Graph<G> dijkstra(string id){
     Graph<G> a;
     map<node,int> final;
@@ -513,6 +512,7 @@ public:
       for(auto it2=it->second->edges.begin();it2!=it->second->edges.end();it2++){
         if(it2->second->nodes[1]==it->first){
           a.addEdge(it->second->data->id,it->first->data->id,it2->second->data);
+          a.addEdge(it->first->data->id,it->second->data->id,it2->second->data);
           break;
         }
       }
@@ -520,7 +520,50 @@ public:
     return a;
   };
 
-
+  Graph<G> BellmanFord(string id){
+    Graph<G> a;
+    vector<node> final;
+    map<node,float> values;
+    map<node,node> answer;
+    map<node,bool> inreach;
+    bool changed=1;
+    auto it2 = nodes.find(id);
+    for(auto it=it2;it!=nodes.end();it++){
+      final.push_back(it->second);
+      values[it->second]=std::numeric_limits<float>::max();
+      inreach[it->second]=0;
+    };
+    for(auto it=nodes.begin();it!=it2;it++){
+      final.push_back(it->second);
+      values[it->second]=std::numeric_limits<float>::max();
+      inreach[it->second]=0;
+    };
+    inreach[nodes[id]]=1;
+    values[nodes[id]]=0;
+    while(changed){
+      changed=0;
+      for(auto it=final.begin();it!=final.end();it++)
+        if(inreach[*it])
+          for(auto it2=(*it)->edges.begin();it2!=(*it)->edges.end();it2++)
+            if(it2->second->data + values[*it] < (values[it2->second->nodes[1]])){
+              values[it2->second->nodes[1]]=it2->second->data+values[*it];
+              inreach[it2->second->nodes[1]]=1;
+              answer[it2->second->nodes[1]]=(*it);
+              changed=1;
+            }
+    }
+    for(auto it=final.begin();it!=final.end();it++)
+      a.addNode(new P((*it)->data->id));
+    for(auto it=answer.begin();it!=answer.end();it++)
+      for(auto it2=it->second->edges.begin();it2!=it->second->edges.end();it2++){
+        if(it2->second->nodes[1]==it->first){
+          a.addEdge(it->second->data->id,it->first->data->id,it2->second->data);
+          a.addEdge(it->first->data->id,it->second->data->id,it2->second->data);
+          break;
+        }
+    }
+    return a;
+  }
 
 };
 

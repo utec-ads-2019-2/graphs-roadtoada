@@ -9,7 +9,7 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
-  Graph<P*>test;
+  Graph<P*> test;
   // charged data
     // ifstream ifs("prueba.json");
     // Json::Reader reader;
@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
     test.imprimir();
     test.nedges();
     cout<<test.densidad();*/
-  /*test1{}
+  //test1{}
     test.addNode(new P("A"));
     test.addNode(new P("B"));
     test.addNode(new P("C"));
@@ -120,38 +120,42 @@ int main(int argc, char *argv[]) {
     test.addEdge("F","E",2);
     test.addEdge("D","E",2);
     test.addEdge("F","D",6);
-  */
-  /*test2{}*/
+  
+  /*test2{}
     test.addNode(new P("A"));
     test.addNode(new P("B"));
     test.addNode(new P("C"));
     test.addNode(new P("D"));
     test.addNode(new P("E"));
     test.addNode(new P("F"));
-    test.addEdge("A","B",10);
-    test.addEdge("A","E",11);
-    test.addEdge("A","C",2);
+    test.addEdge("A","B",8);
+    test.addEdge("A","C",7);
+    test.addEdge("B","D",9);
+    test.addEdge("B","E",3);
     test.addEdge("C","D",3);
-    test.addEdge("B","F",4);
-    test.addEdge("A","F",3);
-    test.addEdge("F","E",2);
+    test.addEdge("F","E",4);
+    test.addEdge("C","F",9);
 
-    test.addEdge("B","A",10);
-    test.addEdge("E","A",11);
-    test.addEdge("C","A",2);
+    test.addEdge("B","A",8);
+    test.addEdge("C","A",7);
+    test.addEdge("D","B",9);
+    test.addEdge("E","B",3);
     test.addEdge("D","C",3);
-    test.addEdge("F","B",4);
-    test.addEdge("F","A",3);
-    test.addEdge("E","F",2);
+    test.addEdge("E","F",4);
+    test.addEdge("F","C",9);
+  */
   
-
+  cout<<"CONEXO:"<<endl;
   test.conexo();
+  cout<<"BFS:"<<endl;
   test.BFS("A");
+  cout<<"DFS:"<<endl;
   test.DFS("A");
+  cout<<"DENSIDAD:"<<endl;
   test.densidad();
-  //test.kruskal();
-  test.prim("A");
+  cout<<"CONEXO"<<endl;
   test.conexo();
+  cout<<"BIPARTITO:"<<endl;
   test.bipartito();
   test.imprimir();
   cout<<endl<<endl;
@@ -168,7 +172,11 @@ int main(int argc, char *argv[]) {
     for(auto it=answer.begin();it!=answer.end();++it){
       cout<<it->first<<" "<<it->second<<endl;
     }*/
-
+  cout<<endl<<endl<<"DIJKSTRA"<<endl;
   auto test_dijkstra= test.dijkstra("A");
   test_dijkstra.imprimir();
+  cout<<endl<<endl<<"BELLMAN"<<endl;
+  auto bellman=test.BellmanFord("F");
+  bellman.imprimir();
+  return 0;
 }
