@@ -93,6 +93,12 @@ public:
       data=0;
 
     }
+    Edge(node inicio,node fin,float data_){
+      nodes[0]=inicio;
+      nodes[1]=fin;
+      data=data_;
+
+    }
     void set_data(float data_){data=data_;};
     void set_data(){
       data=distance(nodes[0]->data->y,nodes[0]->data->x,nodes[1]->data->y,nodes[1]->data->x);
